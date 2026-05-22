@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_deep"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="24dp">
+
+        <!-- ========== HEADER ========== -->
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-black"
+                android:letterSpacing="0.08"
+                android:text="INTERNET MONITOR"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/connectionTypeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/badge_background"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.05"
+                android:text="OFFLINE"
+                android:textColor="@color/neon_cyan"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <!-- Neon divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/neon_divider" />
+
+        <!-- ========== STATUS CARD ========== -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/statusCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@android:color/transparent"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/card_glass_background"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- Glow ring + icon -->
+                <FrameLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp">
+
+                    <!-- Outer rotating ring -->
+                    <View
+                        android:id="@+id/outerRing"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/status_glow_ring" />
+
+                    <!-- Pulsing glow -->
+                    <View
+                        android:id="@+id/statusIndicatorBg"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/status_glow_ring"
+                        android:scaleX="0.7"
+                        android:scaleY="0.7" />
+
+                    <!-- Status emoji -->
+                    <TextView
+                        android:id="@+id/statusEmoji"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="?"
+                        android:textColor="@color/neon_cyan"
+                        android:textSize="42sp"
+                        android:textStyle="bold" />
+                </FrameLayout>
+
+                <!-- Status name -->
+                <TextView
+                    android:id="@+id/statusName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="sans-serif-black"
+                    android:letterSpacing="0.05"
+                    android:text="NEURAL LINK"
+                    android:textColor="@color/neon_cyan"
+                    android:textSize="22sp" />
+
+                <!-- Description -->
+                <TextView
+                    android:id="@+id/statusDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
+                    android:lineSpacingExtra="2dp"
+                    android:text="Scanning network nodes..."
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp" />
+
+                <!-- Neon divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="16dp"
+                    android:background="@drawable/neon_divider" />
+
+                <!-- Last check -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Last scan"
+                        android:textColor="@color/text_muted"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/lastCheckTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="--:--:--"
+                        android:textColor="@color/neon_cyan_80"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ========== CONNECTION STATUS BAR ========== -->
+        <LinearLayout
+            android:id="@+id/connectionStatusBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/connection_bar_background"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="14dp">
+
+            <!-- Breathing dot -->
+            <View
+                android:id="@+id/statusDot"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@color/neon_cyan" />
+
+            <TextView
+                android:id="@+id/connectionStatusText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.02"
+                android:text="MONITORING OFFLINE"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- ========== ACTION BUTTONS ========== -->
+        <LinearLayout
+            android:id="@+id/buttonRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnToggle"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_neon_primary"
+                android:backgroundTint="@android:color/transparent"
+                android:fontFamily="sans-serif-black"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:letterSpacing="0.08"
+                android:text="ENGAGE"
+                android:textAllCaps="false"
+                android:textColor="@color/neon_cyan"
+                android:textSize="14sp"
+                app:cornerRadius="14dp"
+                app:rippleColor="@color/neon_cyan_40" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCheckNow"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_neon_outlined"
+                android:backgroundTint="@android:color/transparent"
+                android:fontFamily="sans-serif-black"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:letterSpacing="0.08"
+                android:text="SCAN"
+                android:textAllCaps="false"
+                android:textColor="@color/neon_purple"
+                android:textSize="14sp"
+                app:cornerRadius="14dp"
+                app:rippleColor="@color/neon_purple_20"
+                app:strokeColor="@android:color/transparent"
+                app:strokeWidth="0dp" />
+        </LinearLayout>
+
+        <!-- ========== SETTINGS CARD ========== -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/settingsCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@android:color/transparent"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/card_glass_background"
+                android:orientation="vertical">
+
+                <!-- Settings header -->
+                <LinearLayout
+                    android:id="@+id/settingsHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-bold"
+                        android:letterSpacing="0.03"
+                        android:text="CONFIG NODES"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/settingsArrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+"
+                        android:textColor="@color/neon_cyan_80"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Settings body -->
+                <LinearLayout
+                    android:id="@+id/settingsBody"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="16dp"
+                    android:paddingBottom="16dp"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="14dp"
+                        android:background="@color/glass_border" />
+
+                    <!-- Global URLs -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:letterSpacing="0.05"
+                        android:text="GLOBAL NODES"
+                        android:textColor="@color/neon_cyan_80"
+                        android:textSize="10sp" />
+
+                    <EditText
+                        android:id="@+id/etGlobalUrls"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="14dp"
+                        android:background="@drawable/input_field_background"
+                        android:fontFamily="sans-serif"
+                        android:gravity="top"
+                        android:hint="https://google.com"
+                        android:inputType="textMultiLine"
+                        android:minLines="2"
+                        android:padding="12dp"
+                        android:textColor="@color/text_primary"
+                        android:textColorHint="@color/text_muted"
+                        android:textSize="12sp" />
+
+                    <!-- Russia URLs -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:letterSpacing="0.05"
+                        android:text="RU NODES"
+                        android:textColor="@color/neon_orange_40"
+                        android:textSize="10sp" />
+
+                    <EditText
+                        android:id="@+id/etRussiaUrls"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="14dp"
+                        android:background="@drawable/input_field_background"
+                        android:fontFamily="sans-serif"
+                        android:gravity="top"
+                        android:hint="https://kp40.ru"
+                        android:inputType="textMultiLine"
+                        android:minLines="2"
+                        android:padding="12dp"
+                        android:textColor="@color/text_primary"
+                        android:textColorHint="@color/text_muted"
+                        android:textSize="12sp" />
+
+                    <!-- Whitelist URLs -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:letterSpacing="0.05"
+                        android:text="RKN NODES"
+                        android:textColor="@color/neon_red_40"
+                        android:textSize="10sp" />
+
+                    <EditText
+                        android:id="@+id/etWhitelistUrls"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="14dp"
+                        android:background="@drawable/input_field_background"
+                        android:fontFamily="sans-serif"
+                        android:gravity="top"
+                        android:hint="https://dzen.ru"
+                        android:inputType="textMultiLine"
+                        android:minLines="2"
+                        android:padding="12dp"
+                        android:textColor="@color/text_primary"
+                        android:textColorHint="@color/text_muted"
+                        android:textSize="12sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSaveUrls"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@drawable/button_neon_outlined"
+                        android:backgroundTint="@android:color/transparent"
+                        android:fontFamily="sans-serif-bold"
+                        android:letterSpacing="0.05"
+                        android:text="SAVE CONFIG"
+                        android:textAllCaps="false"
+                        android:textColor="@color/neon_purple"
+                        android:textSize="12sp"
+                        app:cornerRadius="12dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</ScrollView>

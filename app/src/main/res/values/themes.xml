@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.InternetMonitor" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/neon_cyan</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimaryContainer">@color/neon_cyan_20</item>
+        <item name="colorOnPrimaryContainer">@color/neon_cyan</item>
+        <item name="colorSecondary">@color/neon_purple</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/neon_purple_20</item>
+        <item name="colorOnSecondaryContainer">@color/neon_purple</item>
+        <item name="colorSurface">@color/bg_deep</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorSurfaceVariant">@color/glass_surface_solid</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+        <item name="colorOutline">@color/glass_border</item>
+        <item name="colorOutlineVariant">@color/glass_border_light</item>
+        <item name="android:colorBackground">@color/bg_deep</item>
+        <item name="android:statusBarColor">@color/bg_deep</item>
+        <item name="android:navigationBarColor">@color/bg_deep</item>
+        <item name="android:windowBackground">@color/bg_deep</item>
+    </style>
+</resources>

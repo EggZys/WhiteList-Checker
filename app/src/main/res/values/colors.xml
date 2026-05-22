@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Cyberpunk Neon -->
+    <color name="neon_cyan">#FF00D4FF</color>
+    <color name="neon_cyan_80">#CC00D4FF</color>
+    <color name="neon_cyan_40">#6600D4FF</color>
+    <color name="neon_cyan_20">#3300D4FF</color>
+    <color name="neon_cyan_10">#1A00D4FF</color>
+    <color name="neon_purple">#FF7B2FFF</color>
+    <color name="neon_purple_40">#667B2FFF</color>
+    <color name="neon_purple_20">#337B2FFF</color>
+    <color name="neon_green">#FF00FF9F</color>
+    <color name="neon_green_40">#6600FF9F</color>
+    <color name="neon_orange">#FFFF6B35</color>
+    <color name="neon_orange_40">#66FF6B35</color>
+    <color name="neon_red">#FFFF3366</color>
+    <color name="neon_red_40">#66FF3366</color>
+    <color name="neon_gray">#FF8888AA</color>
+
+    <!-- Glass Surfaces -->
+    <color name="bg_deep">#FF0A0A0F</color>
+    <color name="glass_surface">#CC1A1A2E</color>
+    <color name="glass_surface_solid">#FF1A1A2E</color>
+    <color name="glass_border">#FF2D2D4E</color>
+    <color name="glass_border_light">#FF3D3D6E</color>
+    <color name="glass_fill">#0DFFFFFF</color>
+    <color name="glass_fill_strong">#1AFFFFFF</color>
+
+    <!-- Text -->
+    <color name="text_primary">#FFFFFFFF</color>
+    <color name="text_secondary">#B3FFFFFF</color>
+    <color name="text_muted">#66FFFFFF</color>
+
+    <!-- Status Colors (cyberpunk) -->
+    <color name="status_full_access">#FF00FF9F</color>
+    <color name="status_full_access_bg">#3300FF9F</color>
+    <color name="status_russia_only">#FFFF6B35</color>
+    <color name="status_russia_only_bg">#33FF6B35</color>
+    <color name="status_whitelist">#FFFF3366</color>
+    <color name="status_whitelist_bg">#33FF3366</color>
+    <color name="status_no_internet">#FF8888AA</color>
+    <color name="status_no_internet_bg">#338888AA</color>
+    <color name="status_unknown">#FF00D4FF</color>
+    <color name="status_unknown_bg">#3300D4FF</color>
+
+    <!-- Legacy -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="green">#FF00FF9F</color>
+    <color name="orange">#FFFF6B35</color>
+    <color name="red">#FFFF3366</color>
+    <color name="gray">#FF8888AA</color>
+</resources>
