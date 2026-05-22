@@ -32,7 +32,8 @@ WhiteList Checker is a real-time network monitoring application that detects the
 ## Screenshots
 
 <p align="center">
-  <i>Coming soon...</i>
+  <i><img width="576" height="1280" alt="screenshot" src="https://github.com/user-attachments/assets/df8f0308-e2e1-43f5-b5d2-bbc86f1afcc5"/>
+</i>
 </p>
 
 ## Architecture
