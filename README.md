@@ -1,123 +1,164 @@
-# WhiteList Checker
+<div align="center">
+
+# INTERNET MONITOR
+
+### Контроль интернета в реальном времени
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Android-14%2B-green?style=for-the-badge&logo=android" alt="Android 14+">
+  <img src="https://img.shields.io/badge/Android-8.0%2B-green?style=for-the-badge&logo=android" alt="Android 8.0+">
   <img src="https://img.shields.io/badge/Kotlin-1.9-blue?style=for-the-badge&logo=kotlin" alt="Kotlin">
+  <img src="https://img.shields.io/badge/Version-1.2.2-orange?style=for-the-badge" alt="Version">
   <img src="https://img.shields.io/badge/License-MIT-purple?style=for-the-badge" alt="License">
 </p>
 
 <p align="center">
-  <b>Cyberpunk-styled Android app for monitoring internet connectivity and censorship restrictions</b>
+  <b>Cyberpunk-styled Android приложение для мониторинга интернет-цензуры</b><br>
+  <sub>Отслеживайте блокировки, замеряйте скорость, будьте в курсе</sub>
 </p>
+
+<br>
+
+<img width="200" height="400" src="https://github.com/user-attachments/assets/df8f0308-e2e1-43f5-b5d2-bbc86f1afcc5" alt="screenshot"/>
+
+</div>
 
 ---
 
-## Overview
+## Возможности
 
-WhiteList Checker is a real-time network monitoring application that detects the level of internet censorship in your region. It continuously scans multiple URL groups to determine if you have full access, Russia-only access, or are limited to the RKN whitelist.
+### Мониторинг сети
 
-## Features
+Приложение автоматически определяет уровень доступа к интернету, проверяя несколько групп сайтов:
 
-- **Real-time monitoring** - background service checks connectivity every 90 seconds
-- **Smart detection** - identifies 4 network states:
-  - `FULL ACCESS` - all global and local resources available
-  - `RU ONLY` - only Russian websites accessible
-  - `RKN LOCKDOWN` - only government whitelist sites available
-  - `NO SIGNAL` - no internet connection
-- **Persistent notification** - status bar shows current connectivity state
-- **Alert notifications** - instant alerts when network state changes
-- **Custom URL configuration** - add your own URLs to each category
-- **Cyberpunk UI** - dark neon-themed interface with smooth animations
+| Состояние | Описание |
+|-----------|----------|
+| `FULL ACCESS` | Полный доступ - все сайты доступны |
+| `RU ONLY` | Только российские сайты |
+| `RKN LOCKDOWN` | Только сайты из "белого списка" РКН |
+| `NO SIGNAL` | Нет интернета |
 
-## Screenshots
+**Как это работает:**
+- Фоновый сервис проверяет сайты каждые 90 секунд
+- При смене состояния - мгновенное уведомление
+- Постоянное уведомление в статус-баре
 
-<p align="center">
-  <i><img width="576" height="1280" alt="screenshot" src="https://github.com/user-attachments/assets/df8f0308-e2e1-43f5-b5d2-bbc86f1afcc5"/>
-</i>
-</p>
+### Тест скорости
 
-## Architecture
+Встроенная функция Speedtest для замера скорости интернета:
 
-```
-app/src/main/java/com/eggzys/internetmonitor/
-├── MainActivity.kt          # UI with cyberpunk theme and animations
-├── MonitorService.kt        # Foreground service for background monitoring
-├── InternetStateChecker.kt  # Network state detection logic
-├── NotificationHelper.kt    # Notification management
-├── InternetState.kt         # State enum with colors and descriptions
-└── UrlGroups.kt             # URL group configuration
-```
+- **Download** - скорость загрузки (параллельно с нескольких серверов)
+- **Upload** - скорость выгрузки
+- **Ping** - задержка соединения
+- Анимированный датчик в стиле Ookla
 
-## Tech Stack
+### Настройка URL
 
-- **Language**: Kotlin
-- **UI**: Material3 + Custom drawables
-- **Networking**: OkHttp 4.12
-- **Coroutines**: Kotlin Coroutines for async operations
-- **Architecture**: Service-based background monitoring
+Вы можете добавить свои сайты для проверки в каждой категории:
 
-## URL Groups
+| Категория | Сайты по умолчанию |
+|-----------|-------------------|
+| Глобальные | ru.yummyani.me, wikipedia.org |
+| Россия | sberbank.ru, tbank.ru |
+| Белый список РКН | nalog.gov.ru, gosuslugi.ru |
 
-The app checks three categories of URLs:
+---
 
-| Category | Default URLs | Purpose |
-|----------|-------------|---------|
-| Global | ru.yummyani.me, wikipedia.org | Tests global internet access |
-| Russia | sberbank.ru, tbank.ru | Tests Russian website access |
-| RKN Whitelist | nalog.gov.ru, gosuslugi.ru | Tests government whitelist |
+## Установка
 
-## Build
+### Скачать APK
+
+Перейдите в [Releases](https://github.com/EggZys/WhiteList-Checker/releases) и скачайте последнюю версию:
+
+- `app-arm64-v8a-release.apk` - для современных 64-битных устройств
+- `app-armeabi-v7a-release.apk` - для старых 32-битных устройств
+
+### Сборка из исходников
 
 ```bash
-# Clone repository
+# Клонировать репозиторий
 git clone https://github.com/EggZys/WhiteList-Checker.git
 cd WhiteList-Checker
 
-# Build debug APK
+# Собрать debug APK
 ./gradlew assembleDebug
 
-# Install on device
+# Установить на устройство
 ./gradlew installDebug
 ```
 
-## Requirements
+---
 
-- Android Studio Hedgehog (2023.1.1) or newer
-- Android SDK 34
-- Minimum device: Android 8.0 (API 26)
+## Требования
 
-## Permissions
-
-| Permission | Purpose |
-|------------|---------|
-| `INTERNET` | Network connectivity checks |
-| `ACCESS_NETWORK_STATE` | Network state detection |
-| `FOREGROUND_SERVICE` | Background monitoring |
-| `POST_NOTIFICATIONS` | Status notifications |
-
-## How It Works
-
-1. User presses **ENGAGE** to start monitoring
-2. Foreground service launches with persistent notification
-3. Every 90 seconds, the app checks all URL groups in parallel
-4. Based on which groups respond, it determines the network state
-5. If state changes, an alert notification is sent
-6. UI updates with color-coded status and animations
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+| Компонент | Минимум |
+|-----------|---------|
+| Android | 8.0 (API 26) |
+| Android Studio | Hedgehog (2023.1.1) |
+| SDK | 34 |
+| Java | 17 |
 
 ---
 
-<p align="center">
-  <sub>Built with Kotlin and Material3</sub>
-</p>
+## Разрешения
+
+| Разрешение | Зачем |
+|------------|-------|
+| `INTERNET` | Проверка доступности сайтов |
+| `ACCESS_NETWORK_STATE` | Определение состояния сети |
+| `ACCESS_WIFI_STATE` | Информация о Wi-Fi |
+| `FOREGROUND_SERVICE` | Фоновый мониторинг |
+| `FOREGROUND_SERVICE_DATA_SYNC` | Синхронизация данных |
+| `POST_NOTIFICATIONS` | Уведомления о смене состояния |
+
+---
+
+## Как использовать
+
+1. **Запустите приложение** - увидите текущий статус сети
+2. **Нажмите ENGAGE** - запустите фоновый мониторинг
+3. **Вкладка SPEEDTEST** - замерьте скорость интернета
+4. **Настройте URL** - добавьте свои сайты для проверки
+
+---
+
+## Технологии
+
+- **Kotlin** - язык разработки
+- **Material3** - дизайн-система с кастомными drawable
+- **OkHttp 4.12** - HTTP-клиент для проверки сайтов
+- **Coroutines** - асинхронные операции
+- **ViewPager2** - навигация между вкладками
+
+---
+
+## Структура проекта
+
+```
+app/src/main/java/com/eggzys/internetmonitor/
+├── MainActivity.kt           # Главная активность с TabLayout
+├── MonitorFragment.kt        # Фрагмент мониторинга
+├── SpeedTestFragment.kt      # Фрагмент теста скорости
+├── SpeedTestEngine.kt        # Логика теста скорости
+├── SpeedTestGaugeView.kt     # Кастомный датчик скорости
+├── MonitorService.kt         # Фоновый сервис
+├── InternetStateChecker.kt   # Проверка состояния сети
+├── NotificationHelper.kt     # Управление уведомлениями
+├── InternetState.kt          # Перечисление состояний
+└── UrlGroups.kt              # Конфигурация URL
+```
+
+---
+
+## Лицензия
+
+MIT License - см. [LICENSE](LICENSE)
+
+---
+
+<div align="center">
+
+**Сделано с любовью к киберпанку**
+
+[Report Bug](https://github.com/EggZys/WhiteList-Checker/issues) · [Request Feature](https://github.com/EggZys/WhiteList-Checker/issues)
+
+</div>
