@@ -5,17 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.LinearInterpolator
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.card.MaterialCardView
 import kotlinx.coroutines.launch
 
 class SpeedTestFragment : Fragment() {
@@ -29,15 +24,10 @@ class SpeedTestFragment : Fragment() {
     private lateinit var uploadValue: TextView
     private lateinit var pingValue: TextView
     private lateinit var btnStartTest: MaterialButton
-    private lateinit var serverSpinner: Spinner
-    private lateinit var serverLabel: TextView
-    private lateinit var resultsCard: MaterialCardView
 
     private val engine = SpeedTestEngine()
     private var isTesting = false
-    private var selectedServer = SpeedTestServer.CLOUDFLARE
 
-    // Animators
     private var ringAnimator: ObjectAnimator? = null
 
     override fun onCreateView(
@@ -52,7 +42,6 @@ class SpeedTestFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initViews(view)
-        setupServerSpinner()
         setupCallbacks()
         startRingAnimation()
 
@@ -74,26 +63,6 @@ class SpeedTestFragment : Fragment() {
         uploadValue = view.findViewById(R.id.uploadValue)
         pingValue = view.findViewById(R.id.pingValue)
         btnStartTest = view.findViewById(R.id.btnStartTest)
-        serverSpinner = view.findViewById(R.id.serverSpinner)
-        serverLabel = view.findViewById(R.id.serverLabel)
-        resultsCard = view.findViewById(R.id.resultsCard)
-    }
-
-    private fun setupServerSpinner() {
-        val adapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_spinner_item,
-            SpeedTestServer.ALL.map { it.name }
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        serverSpinner.adapter = adapter
-        serverSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                selectedServer = SpeedTestServer.ALL[position]
-                serverLabel.text = selectedServer.name.uppercase()
-            }
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
     }
 
     private fun setupCallbacks() {
@@ -145,7 +114,6 @@ class SpeedTestFragment : Fragment() {
         btnStartTest.text = "TESTING..."
         btnStartTest.setTextColor(ContextCompat.getColor(requireContext(), R.color.neon_red))
 
-        // Reset
         gaugeView.reset()
         speedValue.text = "0.00"
         speedUnit.text = "Mbps"
@@ -154,19 +122,15 @@ class SpeedTestFragment : Fragment() {
         pingValue.text = "-- ms"
         testStatus.text = "Initializing..."
 
-        // Change ring color during test
         val ringDrawable = gaugeOuterRing.background as? android.graphics.drawable.GradientDrawable
         ringDrawable?.setStroke(3, ContextCompat.getColor(requireContext(), R.color.neon_orange))
 
         lifecycleScope.launch {
             try {
-                val result = engine.runTest(selectedServer)
+                val result = engine.runTest()
 
-                // Show final results
                 speedValue.text = String.format("%.2f", result.downloadMbps)
                 testStatus.text = "COMPLETE"
-
-                // Restore ring color
                 ringDrawable?.setStroke(3, ContextCompat.getColor(requireContext(), R.color.neon_cyan))
 
             } catch (e: Exception) {

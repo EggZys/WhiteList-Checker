@@ -34,7 +34,6 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/serverLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/badge_background"
@@ -42,7 +41,7 @@
                 android:letterSpacing="0.05"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="4dp"
-                android:text="CLOUDFLARE"
+                android:text="MULTI-SERVER"
                 android:textColor="@color/neon_cyan"
                 android:textSize="10sp" />
         </LinearLayout>
@@ -53,45 +52,6 @@
             android:layout_height="1dp"
             android:layout_marginBottom="24dp"
             android:background="@drawable/neon_divider" />
-
-        <!-- ========== SERVER SELECTOR ========== -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            app:cardBackgroundColor="@android:color/transparent"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="0dp"
-            app:strokeColor="@android:color/transparent"
-            app:strokeWidth="0dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/card_glass_background"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:letterSpacing="0.03"
-                    android:text="SERVER"
-                    android:textColor="@color/text_muted"
-                    android:textSize="11sp" />
-
-                <Spinner
-                    android:id="@+id/serverSpinner"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="12dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/input_field_background"
-                    android:popupBackground="@color/glass_surface" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
 
         <!-- ========== GAUGE ========== -->
         <FrameLayout
