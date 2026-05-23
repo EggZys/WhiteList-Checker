@@ -62,9 +62,9 @@ The app checks three categories of URLs:
 
 | Category | Default URLs | Purpose |
 |----------|-------------|---------|
-| Global | google.com, github.com, cloudflare.com | Tests global internet access |
-| Russia | kp40.ru, rbc.ru, 1tv.ru | Tests Russian website access |
-| RKN Whitelist | dzen.ru, gosuslugi.ru, vk.com | Tests government whitelist |
+| Global | ru.yummyani.me, wikipedia.org | Tests global internet access |
+| Russia | sberbank.ru, tbank.ru | Tests Russian website access |
+| RKN Whitelist | nalog.gov.ru, gosuslugi.ru | Tests government whitelist |
 
 ## Build
 
